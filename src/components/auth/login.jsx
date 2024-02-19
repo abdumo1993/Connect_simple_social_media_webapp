@@ -9,7 +9,7 @@ export default function Login(props) {
     function handleSubmit(event) {
         event.preventDefault();
         
-        axios.post('http://192.168.1.8:3000/auth/login', formData)
+        axios.post('http://192.168.1.8:3000/auth/login', formData, {withCredentials:true})
             .then(res => {
                 if (res.status === 200) navigate('/api/home')
             })

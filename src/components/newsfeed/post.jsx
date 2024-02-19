@@ -19,7 +19,7 @@ export default function Post(props) {
 
     useEffect(() => {
         async function fetchpost() {
-            const p = await axios.get(`http://192.168.1.8:3000/api/posts/${id}`)
+            const p = await axios.get(`http://192.168.1.8:3000/api/posts/${id}`, {withCredentials: true})
             setCurrentPost(p.data);
         }
         fetchpost();

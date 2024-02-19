@@ -11,8 +11,11 @@ export default function Newsfeed() {
         // this is for getting all posts 
         async function fetchdata () {
 
-            try{const res = await axios.get('http://192.168.1.8:3000/api/posts')
-            setAllPosts(res.data)}
+            try{const res = await axios.get('http://192.168.1.8:3000/api/posts', {withCredentials: true})
+            setAllPosts(res.data)
+
+        }
+            
             catch(err) {
                 console.log(err)
             }

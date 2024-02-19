@@ -9,7 +9,7 @@ export default function Register(props) {
     function handleSubmit(event) {
         event.preventDefault();
 
-        axios.post('http://192.168.1.8:3000/auth/register', formData)
+        axios.post('http://192.168.1.8:3000/auth/register', formData, {withCredentials: true})
             .then(res => {
                 if (res.status === 201) {
                     navigate('/api/home')}

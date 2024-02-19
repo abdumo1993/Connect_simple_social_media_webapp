@@ -1,27 +1,56 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import NavBar from "../NavBar";
 
 export default function EditProfile() {
+    const [profileData, setProfileData] = useState({})
+    const [formData, setFormData] = useState({name: '', email:'', username: ''})
+    
+    function handleChange(event) {
+        const {name, value} = event.target
+        setFormData(prev => {
+            return {...formData, [name]: value}
+        })
+    }
+
+    useEffect(() => {
+        async function fetchData () {
+            const prof = await axios.get('http://192.168.1.8:3000/api/profile', {withCredentials: true})
+            setProfileData(prof.data)
+            setFormData(prof.data)
+            // console.log(prof)
+        }
+        fetchData();
+    }, [])
     
     const navigate = useNavigate()
-    function handleEdit() {
-        return 0;
+    function handleEdit(event) {
+        event.preventDefault();
+        axios.patch('http://192.168.1.8:3000/api/profile', formData, {withCredentials: true})
+        .then(res => {
+            if (res.status === 201) navigate('/api/profile')  
+        })
+        .catch(err => {
+            console.log(err.response.data)
+        })
+        
     }
     return (
         <div className="editProfile">
-            <form className="formEdit">
+            <form className="formEdit" onSubmit={handleEdit}>
 
                 <div className = 'edit--inputs'>
                     <label htmlFor="email">email</label>
-                    <input type="text" name="email" id="email" />
+                    <input type="text" name="email" id="email" onChange={handleChange} value={formData.email}/>
                 </div>
                 <div className = 'edit--inputs'>
                     <label htmlFor="name">name</label>
-                    <input type="text" name="name" id="name" />
+                    <input type="text" name="name" id="name" onChange={handleChange} value={formData.name}/>
                 </div>
                 <div className = 'edit--inputs'>
                     <label htmlFor="username">username</label>
-                    <input type="text" name="username" id="username" />
+                    <input type="text" name="username" id="username" onChange={handleChange} value={formData.username}/>
                 </div>
                 <div className="edit--password">
                     <span>Edit password?</span>

@@ -25,8 +25,8 @@ router.post('/api/posts', authorisationMiddleWare, validatePost, async (req, res
     }
 })
 // newsfeed.
-router.get('/api/posts', authorisationMiddleWare, async (req, res) => {
-    // console.log(req.user)
+router.get('/api/posts', async (req, res) => {
+    console.log(req.user)
 
     try {
         const posts = await Post.find({})

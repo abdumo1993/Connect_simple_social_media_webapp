@@ -9,6 +9,7 @@ const saltRounds = 10;
 
 
 router.post('/auth/login', validateLogin, passport.authenticate('local'), async (req, res) => {
+    // console.log(req.user)
     if (req.user) return res.sendStatus(200)
     // const exist = await bcrypt.compare(email,  )
 

@@ -11,6 +11,7 @@ router.get('/api/profile', authorisationMiddleWare, async (req, res) => {
         const finduser = await User.findOne({ _id: user })
         if (!finduser) return res.status(404).send('Account not found.')
         let { name, email, username } = finduser
+    console.log(email)
         name = name || 'unknown';
         username = username || 'unknown';
         return res.status(200).send({ name: name, username: username, email: email })
@@ -36,6 +37,8 @@ router.patch('/api/profile', authorisationMiddleWare, validateEditProfile, async
 
     } catch (err) {
         console.log(err)
+        console.log('there')
+
         return res.sendStatus(500);
     }
 })

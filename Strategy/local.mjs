@@ -19,7 +19,7 @@ passport.deserializeUser(async (id, done) => {
 })
 export default passport.use(
     new Strategy({usernameField: 'email'}, async (email, password, done) => {
-    console.log('nowheer')
+    // console.log('nowheer')
 
         try {
             const findUser = await User.findOne({ email: email })

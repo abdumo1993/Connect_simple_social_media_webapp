@@ -11,9 +11,9 @@ body {
     margin: 0px;
 }
 .auth--login {
-    width:  400px;
+    width:  350px;
     max-width:  100%; /* Allow the form to shrink on smaller screens */
-    margin:  0 auto; /* Center the form */
+    margin:  auto; /* Center the form */
     padding:  30px  20px; /* Add padding inside the form */
     box-shadow:  0  0  10px  3px #78b5b5;
     background: linear-gradient(#550572  30.18%, rgb(130,  81,  81)  100%);
@@ -22,6 +22,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .auth--login--form {

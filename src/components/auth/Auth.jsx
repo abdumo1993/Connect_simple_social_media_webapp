@@ -9,7 +9,6 @@ export default function Auth() {
     }
     return (
         <main className="auth">
-            <h1 className="auth--title">Authentication Page</h1>
          {login && <Login login = {login} switchMode = {modeSwitch}/>}
          {!login && <Register login = {login} switchMode = {modeSwitch}/>}
 

@@ -4,7 +4,6 @@ import './App.css'
 import Auth from './components/auth/Auth'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import Newsfeed from './components/NewFeed';
-import MainApp from './components/MainApp';
 import Newsfeed from './components/newsfeed/NewFeed';
 import NotificationPage from './components/notification/NotificationsPage';
 import Profile from './components/profile/profile';

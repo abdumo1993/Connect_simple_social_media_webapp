@@ -1,8 +1,7 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Connect Simple Social media WebApp
+<h2>Front End</h2>
+<h3>How to start</h3>
+<p>first clone the frontend with:
+<pre><code>git clone -b main https://github.com/abdumo1993/Connect_simple_social_media_webapp</code></pre>
+<li>navigate to your folder and then run the following command:</li>
+<pre><code>npm run dev</code></pre>

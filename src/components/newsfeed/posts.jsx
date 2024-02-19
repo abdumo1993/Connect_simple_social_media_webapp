@@ -6,13 +6,16 @@ import commentLogo from '../../assets/comment.png';
 import shareLogo from '../../assets/share.png';
 export default function Posts(props) {
     const [showMore, setShowMore] = useState(false)
-    const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tenetur alias nemo quo maiores rem saepe dicta iste dignissimos expedita! Eos quas temporibus alias consectetur cumque tenetur, nemo voluptatibus veritatis';
+    // const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tenetur alias nemo quo maiores rem saepe dicta iste dignissimos expedita! Eos quas temporibus alias consectetur cumque tenetur, nemo voluptatibus veritatis';
+    const { post } = props
+    console.log(post)
+
     return (
         <div className="newsfeed--posts">
             <img src={logo} alt="" className="post--img" />
             <div className="post--content">
-                <p className="post--content--text">{showMore ? text : text.slice(0, 600) + '...'}</p>
-                {<Link to={`/api/home/${props.id}`} className='here'>
+                <p className="post--content--text">{showMore ? post.text : post.text.slice(0, 600) + '...'}</p>
+                {<Link to={`/api/home/${post._id}`} className='here'>
                     <p className="post--content--more" onClick={() => { setShowMore(prev => !prev) }}>{showMore ? '...less' : '...more'}</p>
                 </Link>}
                 

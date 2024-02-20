@@ -38,6 +38,8 @@ export default function Profile() {
     const [showDbox, setShowDbox] = useState(false)
     const [showPreview, setShowPreview] = useState(null)
     const [profileData, setProfileData] = useState({})
+    const apiUrl = import.meta.env.VITE_API_URL
+
 
     const navigate = useNavigate();
     function onEdit() {
@@ -45,7 +47,7 @@ export default function Profile() {
     }
     useEffect(() => {
         async function fetchData () {
-            const prof = await axios.get('http://192.168.1.8:3000/api/profile', {withCredentials: true})
+            const prof = await axios.get(`${apiUrl}/api/profile`, {withCredentials: true})
             setProfileData(prof.data)
             console.log(prof)
         }

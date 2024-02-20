@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 export default function Register(props) {
     const [formData, setFormData] = useState({ email: '', password: '', Cpassword: '' })
     const [error, setError] = useState('');
+    const apiUrl = import.meta.env.VITE_API_URL
+
     const navigate = useNavigate();
 
     function handleSubmit(event) {
         event.preventDefault();
 
-        axios.post('http://192.168.1.8:3000/auth/register', formData, {withCredentials: true})
+        axios.post(`${apiUrl}/auth/register`, formData, {withCredentials: true})
             .then(res => {
                 if (res.status === 201) {
                     navigate('/api/home')}

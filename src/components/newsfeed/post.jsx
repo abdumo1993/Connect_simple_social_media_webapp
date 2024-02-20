@@ -14,12 +14,14 @@ function handleComment () {
 export default function Post(props) {
     const { id } = useParams();
     const [currentPost, setCurrentPost] = useState({})
+    const apiUrl = import.meta.env.VITE_API_URL
+
     
     
 
     useEffect(() => {
         async function fetchpost() {
-            const p = await axios.get(`http://192.168.1.8:3000/api/posts/${id}`, {withCredentials: true})
+            const p = await axios.get(`${apiUrl}/api/posts/${id}`, {withCredentials: true})
             setCurrentPost(p.data);
         }
         fetchpost();

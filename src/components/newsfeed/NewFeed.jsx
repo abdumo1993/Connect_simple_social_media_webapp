@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Newsfeed() {
+    const apiUrl = import.meta.env.VITE_API_URL
     const [allPosts, setAllPosts] = useState([])
     useEffect(() => {
         // this is for getting all posts 
         async function fetchdata () {
 
-            try{const res = await axios.get('http://192.168.1.8:3000/api/posts', {withCredentials: true})
+            try{const res = await axios.get(`${apiUrl}/api/posts`, {withCredentials: true})
             setAllPosts(res.data)
 
         }

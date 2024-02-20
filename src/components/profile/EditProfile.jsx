@@ -6,6 +6,7 @@ import NavBar from "../NavBar";
 export default function EditProfile() {
     const [profileData, setProfileData] = useState({})
     const [formData, setFormData] = useState({name: '', email:'', username: ''})
+    const apiUrl = import.meta.env.VITE_API_URL
     
     function handleChange(event) {
         const {name, value} = event.target
@@ -16,7 +17,7 @@ export default function EditProfile() {
 
     useEffect(() => {
         async function fetchData () {
-            const prof = await axios.get('http://192.168.1.8:3000/api/profile', {withCredentials: true})
+            const prof = await axios.get(`${apiUrl}/api/profile`, {withCredentials: true})
             setProfileData(prof.data)
             setFormData(prof.data)
             // console.log(prof)
@@ -27,7 +28,7 @@ export default function EditProfile() {
     const navigate = useNavigate()
     function handleEdit(event) {
         event.preventDefault();
-        axios.patch('http://192.168.1.8:3000/api/profile', formData, {withCredentials: true})
+        axios.patch(`${apiUrl}/api/profile`, formData, {withCredentials: true})
         .then(res => {
             if (res.status === 201) navigate('/api/profile')  
         })

@@ -5,11 +5,13 @@ import axios from 'axios';
 export default function Login(props) {
     const [formData, setFormData] = useState({ email: '', password: '' })
     const [error, setError] = useState('');
+    const apiUrl = import.meta.env.VITE_API_URL
+
     const navigate = useNavigate();
     function handleSubmit(event) {
         event.preventDefault();
         
-        axios.post('http://192.168.1.8:3000/auth/login', formData, {withCredentials:true})
+        axios.post(`${apiUrl}/auth/login`, formData, {withCredentials:true})
             .then(res => {
                 if (res.status === 200) navigate('/api/home')
             })

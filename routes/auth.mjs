@@ -15,7 +15,7 @@ router.post('/auth/login', validateLogin, passport.authenticate('local'), async 
 
 })
 router.post('/auth/register', validateLogin, validateRegistration, async (req, res) => {
-
+    console.log(req.session)
     let { email, password, Cpassword } = req.body;
     try {
         password = await bcrypt.hash(password, saltRounds)
@@ -25,7 +25,12 @@ router.post('/auth/register', validateLogin, validateRegistration, async (req, r
             password: password
         });
         await newUser.save();
-        return res.sendStatus(201)
+        req.logIn(newUser, function(err) {
+            if (err) {
+                return res.status(500).send('Something went wrong.');
+            }
+            return res.status(201).send('User registered and logged in.');
+        });
     } catch (err) {
         if (err.name === "MongoServerError" && err.code === 11000) return res.status(400).send('Email already in use.')
         return res.sendStatus(500).send('Something went wrong.')

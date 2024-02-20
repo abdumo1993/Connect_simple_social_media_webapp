@@ -42,10 +42,13 @@ app.use(passport.session());
 // all routes assossiated with authentication.
 app.use(routes)
 
-
+app.get('/', (req, res) => {
+    return res.status(200).send('found')
+})
 
 
 const PORT = process.env.PORT || 3000;
+// const HOST = process.env.HOST || 'localhost'
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}...`)
 })

@@ -4,9 +4,10 @@ import Posts from "./posts";
 import { mokePost } from "../../statics/mokePosts"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useApi } from "../Contexts/apiContext";
 
 export default function Newsfeed() {
-    const apiUrl = import.meta.env.VITE_API_URL
+    const apiUrl = useApi();
     const [allPosts, setAllPosts] = useState([])
     useEffect(() => {
         // this is for getting all posts 
@@ -23,7 +24,7 @@ export default function Newsfeed() {
         }
         fetchdata();
     }, [])
-    console.log('here')
+
     return (
         <div className="main">
 

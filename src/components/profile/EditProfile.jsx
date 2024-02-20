@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../NavBar";
+import { useApi } from "../Contexts/apiContext";
+import { useUpdateUser, useUser } from "../Contexts/userContext";
 
 export default function EditProfile() {
-    const [profileData, setProfileData] = useState({})
-    const [formData, setFormData] = useState({name: '', email:'', username: ''})
-    const apiUrl = import.meta.env.VITE_API_URL
+    const user = useUser();
+    const [formData, setFormData] = useState(user)
+    const apiUrl = useApi()
     
     function handleChange(event) {
         const {name, value} = event.target
@@ -15,15 +17,6 @@ export default function EditProfile() {
         })
     }
 
-    useEffect(() => {
-        async function fetchData () {
-            const prof = await axios.get(`${apiUrl}/api/profile`, {withCredentials: true})
-            setProfileData(prof.data)
-            setFormData(prof.data)
-            // console.log(prof)
-        }
-        fetchData();
-    }, [])
     
     const navigate = useNavigate()
     function handleEdit(event) {

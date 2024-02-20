@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useApi } from "../Contexts/apiContext";
 export default function Register(props) {
     const [formData, setFormData] = useState({ email: '', password: '', Cpassword: '' })
     const [error, setError] = useState('');
-    const apiUrl = import.meta.env.VITE_API_URL
+    const apiUrl = useApi()
 
     const navigate = useNavigate();
 

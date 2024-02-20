@@ -4,6 +4,8 @@ import ImageUploader from 'react-image-upload';
 import { useEffect, useState } from 'react';
 import NavBar from '../NavBar';
 import axios from 'axios';
+import { useApi } from '../Contexts/apiContext';
+import { useUpdateUser, useUser } from '../Contexts/userContext';
 const Dialogue = (props) => {
 
     function onImageCancel() {
@@ -37,8 +39,9 @@ const Dialogue = (props) => {
 export default function Profile() {
     const [showDbox, setShowDbox] = useState(false)
     const [showPreview, setShowPreview] = useState(null)
-    const [profileData, setProfileData] = useState({})
-    const apiUrl = import.meta.env.VITE_API_URL
+    const apiUrl = useApi();
+    const user = useUser();
+    const setUser = useUpdateUser();
 
 
     const navigate = useNavigate();
@@ -48,8 +51,7 @@ export default function Profile() {
     useEffect(() => {
         async function fetchData () {
             const prof = await axios.get(`${apiUrl}/api/profile`, {withCredentials: true})
-            setProfileData(prof.data)
-            console.log(prof)
+            setUser(prof.data)
         }
         fetchData();
     }, [])
@@ -69,9 +71,9 @@ export default function Profile() {
             <hr />
             <div className="profile--content">
                 <div className="profile--info">
-                    <p>name: {profileData.name}</p>
-                    <p>username: {profileData.username}</p>
-                    <p>email: {profileData.email}</p>
+                    <p>name: {user.name}</p>
+                    <p>username: {user.username}</p>
+                    <p>email: {user.email}</p>
                 </div>
                 <hr />
                 <div className="profile--options">

@@ -8,7 +8,7 @@ export default function Posts(props) {
     const [showMore, setShowMore] = useState(false)
     // const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tenetur alias nemo quo maiores rem saepe dicta iste dignissimos expedita! Eos quas temporibus alias consectetur cumque tenetur, nemo voluptatibus veritatis';
     const { post } = props
-    console.log(post)
+
 
     return (
         <div className="newsfeed--posts">

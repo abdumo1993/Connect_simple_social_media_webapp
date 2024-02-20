@@ -1,9 +1,18 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import { useApi } from "../Contexts/apiContext";
 
 export default function DeleteProfile() {
     const navigate = useNavigate();
-    function handleDelete () {
-        return 0;
+    const apiUrl = useApi();
+    async function handleDelete() {
+        const res = await axios.delete(`${apiUrl}/api/profile/delete`, { withCredentials: true })
+        if (res.status === 202) navigate('/')
+        else {
+            alert('Something went wrong!')
+            navigate('/api/profile')
+        }
+
     }
     return (
         <div className="deleteProfile">

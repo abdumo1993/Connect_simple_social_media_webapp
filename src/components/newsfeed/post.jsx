@@ -5,6 +5,7 @@ import axios from "axios";
 import commentLogo from '../../assets/comment.png';
 import shareLogo from '../../assets/share.png';
 import sendLogo from '../../assets/send.png'
+import { useApi } from "../Contexts/apiContext";
 export function handleLike() {
     return 0;
 }
@@ -14,7 +15,7 @@ function handleComment () {
 export default function Post(props) {
     const { id } = useParams();
     const [currentPost, setCurrentPost] = useState({})
-    const apiUrl = import.meta.env.VITE_API_URL
+    const apiUrl = useApi();
 
     
     
@@ -28,7 +29,7 @@ export default function Post(props) {
     }, [])
     // two, post and comments fields in post.
     const { post, comments } = currentPost
-    console.log(post)
+
     return (
         <div className="post">
             <div className="post--post">

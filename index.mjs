@@ -14,7 +14,6 @@ const app = express();
 //     res.end();
 // });
 const allowed_domain = process.env.ALLOWED_DOMAIN
-console.log(allowed_domain)
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", `${allowed_domain}`);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -22,8 +21,8 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
-
-mongoose.connect('mongodb://localhost:27017/connect')
+const database_url = process.env.DATABASE_URL
+mongoose.connect(`${database_url}/connect`)
     .then(() => console.log('connected to database.'))
     .catch(err => console.log(err))
 // app.use(cors());

@@ -20,7 +20,7 @@ export default function Post(props) {
         event.preventDefault();
         const res = await axios.post(`${apiUrl}/api/posts/${id}/comment`, comment, {withCredentials: true})
         console.log(res.status)
-        // setCurrentPost(currentPost)
+        setCurrentPost(currentPost)
     }
     
 

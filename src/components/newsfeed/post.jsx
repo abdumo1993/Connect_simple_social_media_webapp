@@ -9,15 +9,19 @@ import { useApi } from "../Contexts/apiContext";
 export function handleLike() {
     return 0;
 }
-function handleComment () {
-    return 0;
-}
+
 export default function Post(props) {
     const { id } = useParams();
     const [currentPost, setCurrentPost] = useState({})
+    const [comment, setComment] = useState({})
     const apiUrl = useApi();
 
-    
+    async function handleComment (event) {
+        event.preventDefault();
+        const res = await axios.post(`${apiUrl}/api/posts/${id}/comment`, comment, {withCredentials: true})
+        console.log(res.status)
+        // setCurrentPost(currentPost)
+    }
     
 
     useEffect(() => {
@@ -36,7 +40,7 @@ export default function Post(props) {
                 {/* {post.post.text} */}
                 {post && (
                     <>
-                        <img src={post.imageUrl} alt="post image" />
+                        <img src={`${apiUrl}/${post.imageUrl}`} alt="post image" />
                         <p>{post.text}</p>
                         <div className="post--comment--react">
                             <div className="post--like post--comment--like" onClick={handleLike}>
@@ -45,7 +49,7 @@ export default function Post(props) {
                             </div>
                             <div className="comment">
                                 <form className="comment">
-                                    <textarea name="comment" id="comment" cols="auto" rows="4" placeholder="write comment."></textarea>
+                                    <textarea name="comment" id="comment" cols="auto" rows="4" placeholder="write comment." onChange={event => {setComment(prev => ({...prev, [event.target.name]: event.target.value}))}}></textarea>
                                     <button className="comment--btn" onClick={handleComment}><img src={sendLogo} alt="" /></button>
                                 </form>
                             </div>

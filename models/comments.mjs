@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { User } from "./user.mjs";
 import { Post } from "./posts.mjs";
 const commentSchema = mongoose.Schema({
-    text: {
+    comment: {
         type: mongoose.Schema.Types.String
     },
     postId: {
@@ -15,6 +15,6 @@ const commentSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     }
-})
+}, {timestamps: true})
 
 export const Comment = mongoose.model('Comment', commentSchema);

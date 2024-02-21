@@ -4,12 +4,13 @@ import { Comment } from "../models/comments.mjs";
 import { Like } from "../models/likes.mjs";
 import { validateComments, validateLikes, validatePost } from "../middlewares/post.mjs";
 import { authorisationMiddleWare } from "../middlewares/authorisationMiddleware.mjs";
+import multer from "multer";
+const upload = multer({ dest: 'uploads/' }); 
 const router = Router();
 
-router.post('/api/posts', authorisationMiddleWare, validatePost, async (req, res) => {
+router.post('/api/posts', authorisationMiddleWare, upload.single('image'),validatePost, async (req, res) => {
     const { imageUrl, text } = req.body;
     const author = req.user
-
     const newPost = new Post({
         imageUrl: imageUrl,
         text: text,
@@ -71,10 +72,11 @@ router.post('/api/posts/:id/like', authorisationMiddleWare, validateLikes, async
 })
 
 router.post('/api/posts/:id/comment', authorisationMiddleWare, validateComments, async (req, res) => {
+    console.log(req.body)
     const { id } = req.params
     const author = req.user
     const data = {
-        text: req.body.text,
+        comment: req.body.comment,
         author: author,
         postId: id
     }
@@ -83,7 +85,6 @@ router.post('/api/posts/:id/comment', authorisationMiddleWare, validateComments,
         const comment = await new Comment(data).save()
         return res.status(201).send(comment)
     } catch (err) {
-        console.log(err)
         return res.sendStatus(500);
     }
 })

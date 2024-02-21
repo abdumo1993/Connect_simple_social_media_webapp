@@ -5,6 +5,7 @@ import { User } from './models/user.mjs';
 import session from 'express-session';
 import passport from 'passport';
 import routes from './routes/index.mjs';
+import path, { dirname } from 'path';
 const app = express();
 
 // app.options('/login', function (req, res) {
@@ -38,6 +39,7 @@ app.use(session({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/uploads', express.static(path.join('.', 'uploads')))
 
 // all routes assossiated with authentication.
 app.use(routes)

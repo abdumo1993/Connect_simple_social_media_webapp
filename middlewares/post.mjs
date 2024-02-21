@@ -1,12 +1,17 @@
 import { Like } from "../models/likes.mjs";
 
 const validatePost = (req, res, next) => {
-    const { imageUrl, text } = req.body
+    const { text } = req.body
+    const imageUrl = req.file['path']
+    if (imageUrl) req.body.imageUrl = imageUrl
     const author  = req.user
     
-    if (!author) return res.sendStatus(400)
+    if (!author) {
+        console.log('author not found')
+        return res.sendStatus(400)}
     // altleast one of them must be present. else invalid.
-    if (!imageUrl && !text) return res.sendStatus(400)
+    if (!imageUrl && !text) {
+        return res.sendStatus(400)}
     next();
 }
 
@@ -25,11 +30,11 @@ const validateLikes = async (req, res, next) => {
     }
 }
 const validateComments = async (req, res, next) => {
-    const { text } = req.body
+    const { comment } = req.body
     const  author  = req.user
     const  postId  = req.params
     if (!author) return res.sendStatus(400)
-    if (!text) return res.sendStatus(400)
+    if (!comment) return res.sendStatus(400)
     next();
 }
 

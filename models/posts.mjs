@@ -3,7 +3,7 @@ import { User } from '../models/user.mjs';
 
 const postSchema = mongoose.Schema({
     imageUrl: {
-        type: mongoose.Schema.Types.String,
+        type: mongoose.Schema.Types.String
     },
     text: {
         type: mongoose.Schema.Types.String,
@@ -16,6 +16,6 @@ const postSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User' 
     }
-})
+}, {timestamps: true})
 
 export const Post = mongoose.model('Post', postSchema);

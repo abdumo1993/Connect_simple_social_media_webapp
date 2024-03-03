@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { User } from "../models/user.mjs";
-import { validateEditProfile } from "../middlewares/users.mjs";
-import { authorisationMiddleWare } from "../middlewares/authorisationMiddleware.mjs";
+import { validateAddAdmin, validateEditProfile } from "../middlewares/users.mjs";
+import { adminAuthorisationMiddleware, authorisationMiddleWare } from "../middlewares/authorisationMiddleware.mjs";
+import { Post } from '../models/posts.mjs'
 
 const router = Router();
 
@@ -48,7 +49,7 @@ router.patch('/api/profile', authorisationMiddleWare, validateEditProfile, async
 
 router.delete('/api/profile/delete', authorisationMiddleWare, async (req, res) => {
     try {
-        const deletedUser = await User.findOneAndDelete({_id: req.user})
+        const deletedUser = await User.findOneAndDelete({ _id: req.user })
         if (!deletedUser) return res.status(404).send('User not found')
         return res.status(202).send('Deletion accepted')
     } catch (err) {
@@ -56,7 +57,6 @@ router.delete('/api/profile/delete', authorisationMiddleWare, async (req, res) =
         return res.sendStatus(500);
     }
 })
-
 
 
 

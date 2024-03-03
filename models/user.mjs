@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema({
     username: {
         type: mongoose.Schema.Types.String,
         default: null
+    },
+    isAdmin : {
+        type: mongoose.Schema.Types.Boolean,
+        default: false
     }
 })
 
